@@ -1,37 +1,22 @@
-def caesar_cipher
-    puts "Please enter your text"
-    my_string= gets.chop
-    puts "Please enter the shifting factor"
-    shifting_factor=gets.chop.to_i
-    my_array=my_string.bytes
-    new_array= my_array.map do |char|
-        if char>=97 && char<=122
-            char=char+shifting_factor
-            if char>122
-                char-=26
-            elsif char<97
-                char+=26
-            end
-        elsif char>=65 && char<=90
-            char=char+shifting_factor
-            if char>90
-                char-=26
-            elsif char<65
-                char+=26
-            end
-        elsif char>=48 && char<=57
-            char=char+shifting_factor
-            if char>57
-                char-=10
-            elsif char<48
-                char+=10
-            end
-        else char
+def caesar_cipher(textline, factor)
+    new_array = (textline.bytes).map do |element|
+        if element >=97 && element<=122
+            element += factor
+            element-=26 if element>122
+            element+=26 if element<97
+        elsif element>=65 && element<=90
+            element+= factor
+            element-=26 if element>90
+            element+=26 if element<65
+        elsif element>=48 && element<=57
+            element+= factor
+            element-=10 if element>57       
+            element+=10 if element<48
         end
-        char=char.chr
+        element.chr
     end
-    puts "the original text is #{my_string}"
+    puts "the original text is #{textline}"
     puts "the crypted text is #{new_array.join}"
-return new_array.join
+    return new_array.join
 end
-caesar_cipher
+caesar_cipher("omar", 5)
